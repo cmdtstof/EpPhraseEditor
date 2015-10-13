@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<!DOCTYPE phrases SYSTEM "entities.dtd">
+
+<epp:phrases xmlns="http://www.w3.org/1999/xhtml" xmlns:epp="http://eprints.org/ep3/phrase">
+
+    <epp:phrase id="archive_title">phrase archive_title</epp:phrase>
+    <epp:phrase id="phraseId1">phrase phraseId1 äöü</epp:phrase>
+    <epp:phrase id="phraseId2">phrase phraseId2 ÄÖÜ</epp:phrase>
+    <epp:phrase id="phraseId3">phrase phraseId3 blabla</epp:phrase>
+    <epp:phrase id="phraseId99">phrase phraseId99 nicht findbar</epp:phrase>
+
+</epp:phrases>
