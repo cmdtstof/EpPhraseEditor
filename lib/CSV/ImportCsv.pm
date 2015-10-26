@@ -4,7 +4,7 @@ use warnings;
 use strict;
 
 use Utili::LogCmdt;
-use Text::CSV;
+#use Text::CSV;
 use Utili::Encodings;
 
 use Data::Dumper;
@@ -64,7 +64,11 @@ sub importCsvPhrases {
 
 
 			$newFields{'noWrite'} = removeQuote($data[$i][1]);
-			if ($newFields{'noWrite'} eq "") { $newFields{'noWrite'} = "0"; } 
+			if (undef $newFields{'noWrite'}) {
+				if ($newFields{'noWrite'} eq "") { $newFields{'noWrite'} = "0"; }
+			} else {
+				$newFields{'noWrite'} = "0"; 
+			}
 				
 			for (my $langId = 0; $langId < @langList; $langId++) {
 				$newFields{$langList[$langId]} = Utili::Encodings::checkValue( removeQuote($data[$i][$langId+2]) );
@@ -72,7 +76,7 @@ sub importCsvPhrases {
 				
 			if (!Db::EpeDb::phraseIdFound($newFields{'phraseId'})) {
 				my $phraseIdx = Db::EpeDb::addPhraseId($newFields{'phraseId'}); 	#if phraseId not exist, add it
-				my $fileId = Db::EpeDb::getFileId($fromCsv); 
+				my ($fileId, $language) = Db::EpeDb::getFileId($fromCsv); 
 				Db::EpeDb::addUsedIn($fileId, $phraseIdx);
 				Utili::LogCmdt::logWrite( ( caller(0) )[3],	"phraseId added\t$newFields{'phraseId'}" );
 			}

@@ -14,7 +14,7 @@ sub main {
 	
 	my @langList = @EpPhraseEditor::epe_langList;
 	
-	my $outputDir = $EpPhraseEditor::epe_outputDir . "lang";
+	my $outputDir = $EpPhraseEditor::epe_outputDir . $EpPhraseEditor::epe_archive . "/lang";
 	Utili::FileTools::createDir($outputDir);
 
 
@@ -45,11 +45,13 @@ sub main {
 
 		my $phraseId = $result->{'phraseId'};
 		my $phrase = $result->{$language};
-		$phrase = Utili::Encodings::reparsePhrase($phrase);
+		if ($phrase ne "") {
+			$phrase = Utili::Encodings::reparsePhrase($phrase);
 
 #print "phraseId=$phraseId\tphrase=$phrase\n";
 		
-		writePhrase($phraseId, $phrase);
+			writePhrase($phraseId, $phrase);
+		}
 		
 		
 	} 

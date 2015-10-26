@@ -1,0 +1,15 @@
+
+
+
+rsync -vz /home/stof/03_Projekte/EpPhraseEditor/scr/bin/GetPhrases.pm cmueller@ux-alex-stage.unisg.ch:/usr/share/eprints3/archives/alex/cfg/plugins/EPrints/Plugin/Screen/Admin
+
+
+
+
+
+
+
+
+
+
+rsync -e ssh -vz /home/stof/03_Projekte/EpPhraseEditor/scr/bin/exportPhrases.pl cmueller@ux-alex-stage.unisg.ch:/usr/share/eprints3/bin

@@ -6,6 +6,7 @@ use warnings;
 use strict;
 
 use Data::Dumper;
+use File::Basename;
 
 
 sub getFileListFromPattern {
@@ -29,9 +30,17 @@ sub getPathFilenamePref {
 	(my $without_extension = $pathFilename) =~ s/\.[^.]+$//;
 #print Dumper $without_extension;
 	return $without_extension;
-	
  	
 }
+
+sub getFilenameSuffix {
+	my ($filename) = @_;
+	return fileparse($filename);
+	
+	
+}
+
+
 	
 sub createDir {
 	my ($dir) = @_;
@@ -49,6 +58,7 @@ sub delFile {
 	return;
 	
 }
+
 
 
 1;

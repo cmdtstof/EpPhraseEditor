@@ -15,7 +15,16 @@ my $converterU8tU8 = Text::Iconv->new( "UTF8", "UTF8" );    #übernommen ?????
 
 sub checkValue {
 	my ($str) = @_;
-	$str = $converterU8tU8->convert($str);    # (1)ohne convert utf8>utf8 kommt es falsch!!!???
+	
+	if (defined $str) {
+		$str = $converterU8tU8->convert($str);    # (1)ohne convert utf8>utf8 kommt es falsch!!!???
+	
+#		$str =~ s/\r//g; #remove formfeed
+#		$str =~ s/\t//g; #remove tab
+#		$str =~ s/\n//g; #remove newline
+		
+	}
+	
 	return $str;
 	
 }
@@ -26,6 +35,10 @@ sub validatePhrase {
 	$str =~ s/'/--thisIsApostrophe--/g;
 	$str =~ s/"/--thisIsQuote--/g;
 	$str =~ s/;/--thisIsSemiCol--/g;
+	
+	$str =~ s/\r//g; #remove formfeed
+	$str =~ s/\t//g; #remove tab
+	$str =~ s/\n//g; #remove newline
 			
 	return $str;
 }

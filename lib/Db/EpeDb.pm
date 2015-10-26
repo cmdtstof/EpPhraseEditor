@@ -138,16 +138,19 @@ CREATE TABLE $tbl (
 
 sub getFileId {
 	my ($filename) = @_;
-	my $sth = $dbh->prepare('SELECT fileId FROM tblFiles where filename = ?');
+	my $sth = $dbh->prepare('SELECT fileId, language FROM tblFiles where filename = ?');
 	$sth->execute($filename);
 	my $result = $sth->fetchrow_hashref();
 	my $fileId = $result->{'fileId'};
+	my $language;
 
 	if (!$fileId) {
-		my $language = parseFilename($filename);
+		$language = parseFileLanguage($filename);
 		$fileId = addFile($filename, $language);
+	} else {
+		$language = $result->{'language'};
 	}
-	return $fileId;
+	return ($fileId, $language);
 }
 
 sub getFileLanguage {
@@ -168,7 +171,7 @@ sub getFileName {
 	return $filename;	
 }
 
-sub parseFilename {
+sub parseFileLanguage {
 	my ($filename) = @_;
 
 	my $searchStr = "/lang/";

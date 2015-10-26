@@ -34,6 +34,12 @@
 # write csv 
 
 
+######todo
+#TODO when re-importing phrases from csv, removed phraseId should be removed from db (for code as well?) 
+
+
+
+
 package EpPhraseEditor;
 use warnings;
 use strict;
@@ -49,13 +55,13 @@ use Data::Dumper;
 
 
 
-our $epe_scrDir			= "/home/stof/03_Projekte/alex/scr/alex-scr/alex-scr/";	# EPrints base source directory
+#our $epe_scrDir			= "/home/stof/03_Projekte/alex/scr/alex-scr/alex-scr/";	# EPrints base source directory
 our $epe_archive		= "alex"; #archive id >>> "archives/alex/cfg/lang";
 our @epe_langList 		= qw(en de); #list for language to search/write for !!!db must be adapted!!!!
 
-
+our $epe_importDir		= "../import/";  #import dir for exportPhrases files = $epe_importDir . $epe_archive
 our $epe_logDir			= "../log/";	#log dir
-our $epe_outputDir   	= "../output/";   		# outputdir csv
+our $epe_outputDir   	= "../output/";   		# outputdir csv = $epe_importDir . $epe_archive
 my $epe_dbDir			= "../db/";		#sqlight db dir
 
 our $epe_writeLog 		= 1;				#1=write logfile and entries
@@ -63,17 +69,13 @@ our $epe_stderrOutput 	= 1;				# 1=logfile output will also be sended to stderr
 
 our $epe_testData		= 0;				#1=use testdata for phrase import
 if ($epe_testData) {
-	$epe_scrDir			= "testdata/";	# EPrints base source directory
 	$epe_archive		= "testdata"; #archive id >>> "archives/alex/cfg/lang";
 } 
 
 my $epe_dbName			= "epephrases_" . $epe_archive . ".db";
-my $epe_database 		= $epe_dbDir . $epe_dbName;	
-my $epe_csvPhrases		= $epe_outputDir . $epe_archive . "_phrases.csv";
-our $epe_phraseFile		= "/zzz_" . $epe_archive . "_genPhrases.xml";
-
-
-######todo
+my $epe_database 		= $epe_dbDir . $epe_archive . "/" . $epe_dbName;	
+my $epe_csvPhrases		= $epe_outputDir . $epe_archive . "/" . $epe_archive . "_phrases.csv";
+our $epe_phraseFile		= "zzz_" . $epe_archive . "_genPhrases.xml";
 
 
 
@@ -140,9 +142,14 @@ if ($epe_getPhrased) {
 	use Db::EpeDb;
 	Db::EpeDb::dbOpen($epe_database);
 	
-	use Search;
-	Search::main();
+	my $importDir = $epe_importDir . $epe_archive;
+	use Phrases::ImportPhrases;
+	Phrases::ImportPhrases::import($importDir);
 	
+	
+#	use Search;
+#	Search::main();
+#	
 	
 	Db::EpeDb::dbClose();
 	

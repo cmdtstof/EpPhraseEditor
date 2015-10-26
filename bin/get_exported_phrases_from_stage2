@@ -1,0 +1,4 @@
+rsync -vz cmueller@ux-alex-stage.unisg.ch:/usr/share/eprints3/tmp/alex_phrases_export_de.txt /home/stof/03_Projekte/EpPhraseEditor/import/alex/lang/de
+ 
+rsync -vz cmueller@ux-alex-stage.unisg.ch:/usr/share/eprints3/tmp/alex_phrases_export_en.txt /home/stof/03_Projekte/EpPhraseEditor/import/alex/lang/en
+ 
