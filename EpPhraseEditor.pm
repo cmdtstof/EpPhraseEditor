@@ -20,7 +20,7 @@
 
 #***with csv, LO calc
 #2. gen csv
-#3. open csv with LO calc >>>> ; and " ++++mark quoted field as text!!!!
+#3. open csv with LO calc >>>> , and " ++++mark quoted field as text!!!!
 #4. change phrases and noWrite
 #5. save
 #6. import csv
@@ -53,6 +53,9 @@ use Data::Dumper;
 # Define some constants
 #
 
+our $quote_char = '"';
+our $sep_char = ";";
+
 
 
 #our $epe_scrDir			= "/home/stof/03_Projekte/alex/scr/alex-scr/alex-scr/";	# EPrints base source directory
@@ -67,10 +70,10 @@ my $epe_dbDir			= "../db/";		#sqlight db dir
 our $epe_writeLog 		= 1;				#1=write logfile and entries
 our $epe_stderrOutput 	= 1;				# 1=logfile output will also be sended to stderr
 
-our $epe_testData		= 0;				#1=use testdata for phrase import
-if ($epe_testData) {
-	$epe_archive		= "testdata"; #archive id >>> "archives/alex/cfg/lang";
-} 
+#our $epe_testData		= 0;				#1=use testdata for phrase import
+#if ($epe_testData) {
+#	$epe_archive		= "testdata"; #archive id >>> "archives/alex/cfg/lang";
+#} 
 
 my $epe_dbName			= "epephrases_" . $epe_archive . ".db";
 my $epe_database 		= $epe_dbDir . $epe_archive . "/" . $epe_dbName;	
@@ -84,11 +87,11 @@ our $epe_phraseFile		= "zzz_" . $epe_archive . "_genPhrases.xml";
 my $epe_createDb 		= 0;    #1=create db
 my $epe_getPhrased		= 0;	#1=get phrases and refs(used) from all files
 
-my $epe_analyze			= 0;	#1=analyze phrases
+my $epe_analyze			= 0;	#1=analyze phrases !!!! not used yet !!!
 
 my $epe_writeCsv		= 0;	#1=write csv from db
 
-my $epe_importCsv		= 0;	#1=import csv into db
+my $epe_importCsv		= 1;	#1=import csv into db
 
 my $epe_writePhraseFile	= 1;	#1=write phrase file for language
 

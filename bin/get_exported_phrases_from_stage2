@@ -1,3 +1,24 @@
+
+##################dev
+########send /data/projekte/EpPhraseEditor/scr/bin/exportPhrases.pl to dev
+rsync -v /data/projekte/EpPhraseEditor/scr/bin/exportPhrases.pl cmueller@ux-alex-dev.unisg.ch:/usr/share/eprints3/bin
+
+
+#get exported phrases
+
+
+
+rsync -v cmueller@ux-alex-dev.unisg.ch:/tmp/alex_phrases_export_de.txt /home/stof/03_Projekte/EpPhraseEditor/import/alex/lang/de
+
+rsync -v cmueller@ux-alex-dev.unisg.ch:/tmp/alex_phrases_export_en.txt /home/stof/03_Projekte/EpPhraseEditor/import/alex/lang/en
+
+
+
+
+
+#stage
+
+
 rsync -vz cmueller@ux-alex-stage.unisg.ch:/usr/share/eprints3/tmp/alex_phrases_export_de.txt /home/stof/03_Projekte/EpPhraseEditor/import/alex/lang/de
  
 rsync -vz cmueller@ux-alex-stage.unisg.ch:/usr/share/eprints3/tmp/alex_phrases_export_en.txt /home/stof/03_Projekte/EpPhraseEditor/import/alex/lang/en

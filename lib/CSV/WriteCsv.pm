@@ -7,9 +7,6 @@ use Utili::LogCmdt;
 
 use Data::Dumper;
 
-my $quote_char = '"';
-my $sep_char = ';';
-
 
 sub tester {
 	Utili::LogCmdt::logWrite( ( caller(0) )[3],	"tester" );
@@ -40,9 +37,9 @@ sub writeCsvPhrases {
 	my $last = @fields-1;
 	
 	for (my $i = 0; $i < @fields; $i++) {
-		 print $fh "$quote_char$fields[$i]$quote_char";
+		 print $fh "$EpPhraseEditor::quote_char$fields[$i]$EpPhraseEditor::quote_char";
 		 if ($i < $last) {
-		 	print $fh $sep_char;
+		 	print $fh $EpPhraseEditor::sep_char;
 		 }
 	}
 	print $fh "\n";
@@ -52,11 +49,11 @@ sub writeCsvPhrases {
 		
 		for (my $i = 0; $i < @fields; $i++) {
 			if (defined $result->{$fields[$i]}) {
-				print $fh $quote_char;
+				print $fh $EpPhraseEditor::quote_char;
 				print $fh $result->{$fields[$i]};			
-				print $fh $quote_char;
+				print $fh $EpPhraseEditor::quote_char;
 			}
-			if ($i < $last) { print $fh $sep_char; }
+			if ($i < $last) { print $fh $EpPhraseEditor::sep_char; }
 		}
 		print $fh "\n";
 	}

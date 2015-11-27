@@ -14,7 +14,7 @@ use Data::Dumper;
 
 use EPrints;
 
-my $outputFileBase = "/usr/share/eprints3/tmp/alex_phrases_export";
+my $outputFileBase = "/tmp/alex_phrases_export";
 
 
 my $ep = EPrints->new();

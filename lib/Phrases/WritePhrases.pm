@@ -23,7 +23,7 @@ sub main {
 	for (my $i = 0; $i < @langList; $i++) { 
 		
 		my $language = $langList[$i];
-		my $langDir = $outputDir . "/" . $language;
+		my $langDir = $outputDir . "/" . $language . "/phrases";
 		Utili::FileTools::createDir($langDir);
 		my $file = $langDir . "/" . $EpPhraseEditor::epe_phraseFile;
 

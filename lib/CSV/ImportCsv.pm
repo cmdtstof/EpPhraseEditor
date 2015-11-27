@@ -9,8 +9,7 @@ use Utili::Encodings;
 
 use Data::Dumper;
 
-my $quote_char = '"';
-my $sep_char = ";";
+
 my $fromCsv = "fromCsv";
 
 
@@ -41,7 +40,7 @@ sub importCsvPhrases {
 	my @data;
 	while (my $line = <$fh>) {
 	    chomp $line; #remove newline
-	    my @fields = split(/$sep_char/, $line);
+	    my @fields = split(/$EpPhraseEditor::sep_char/, $line);
 	    push @data, \@fields;
 	}	
 
@@ -56,7 +55,7 @@ sub importCsvPhrases {
 #print Dumper \@header;
 
 	for (my $i = 1; $i < @data; $i++) {
-#		print "$data[$i]\n";
+#print Dumper \$data[$i][0];
 
 		my %newFields;
 		$newFields{'phraseId'} = removeQuote( $data[$i][0] );
@@ -73,6 +72,10 @@ sub importCsvPhrases {
 			for (my $langId = 0; $langId < @langList; $langId++) {
 				$newFields{$langList[$langId]} = Utili::Encodings::checkValue( removeQuote($data[$i][$langId+2]) );
 			}
+
+#print "importCsv newFields phraseId=$newFields{'phraseId'}\n";
+
+
 				
 			if (!Db::EpeDb::phraseIdFound($newFields{'phraseId'})) {
 				my $phraseIdx = Db::EpeDb::addPhraseId($newFields{'phraseId'}); 	#if phraseId not exist, add it
