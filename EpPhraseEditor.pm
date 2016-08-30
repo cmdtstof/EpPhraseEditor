@@ -13,6 +13,10 @@
 
 
 #########how it works
+#use exportPhrases.pl on dev and move files to ~/import/alex/lang/xx
+
+
+
 #1. import phrases
 
 #***with sqlitebrowser

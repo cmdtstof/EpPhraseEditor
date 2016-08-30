@@ -10,7 +10,7 @@ use DBI;
 use XML::Simple qw(:strict);
 
 use Utili::LogCmdt;
-use Data::Dumper;
+#use Data::Dumper;
 use Utili::FileTools;
 
 my $dbh;
@@ -222,7 +222,7 @@ sub updatePhrases {
     }	
 	chop $stmt;
 	$stmt .= " WHERE phraseId = '$phraseId'";	
-#print "stmt=$stmt\n";
+#print "epeDb updatePhrase stmt=$stmt\n";
 	my	$sth = $dbh->prepare($stmt);
 	$sth->execute();
 	return;

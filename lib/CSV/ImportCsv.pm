@@ -63,10 +63,12 @@ sub importCsvPhrases {
 
 
 			$newFields{'noWrite'} = removeQuote($data[$i][1]);
+
+#print "importcsv noWrite";
+#print Dumper $newFields{'noWrite'};
+
 			if (undef $newFields{'noWrite'}) {
 				if ($newFields{'noWrite'} eq "") { $newFields{'noWrite'} = "0"; }
-			} else {
-				$newFields{'noWrite'} = "0"; 
 			}
 				
 			for (my $langId = 0; $langId < @langList; $langId++) {
